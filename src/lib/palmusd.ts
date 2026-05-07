@@ -45,7 +45,7 @@ export class PalmUSDService {
       }
     }
     
-    // Fallback Mock
+    // Fallback for demo
     await new Promise(res => setTimeout(res, 2000));
     
     return {

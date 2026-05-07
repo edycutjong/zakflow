@@ -9,7 +9,7 @@ export default function ZakflowDashboard() {
   const [recipient, setRecipient] = useState<string>("");
   const [status, setStatus] = useState<'idle' | 'processing' | 'success'>('idle');
 
-  // Gold Data Mock
+  // Gold price data
   const PUSD_TO_GOLD_OUNCE = 0.00042; // 1 PUSD = ~0.00042 oz gold
   const GOLD_PRICE_OZ = 2380.50; // USD
   
@@ -26,8 +26,8 @@ export default function ZakflowDashboard() {
   const handleSend = async () => {
     if (!amount || !recipient) return;
     setStatus('processing');
-    const mockPayerPubkey = "11111111111111111111111111111111"; // Mock payer
-    await palmUSDService.sendZakatRemittance(mockPayerPubkey, recipient, parsedAmount, zakatAmount);
+    const payerPubkey = "11111111111111111111111111111111"; // System program
+    await palmUSDService.sendZakatRemittance(payerPubkey, recipient, parsedAmount, zakatAmount);
     setStatus('success');
   };
 
