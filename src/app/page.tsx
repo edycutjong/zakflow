@@ -1,207 +1,93 @@
 "use client";
 
-import { StatusBar } from "@/components/StatusBar";
-import { Footer } from "@/components/Footer";
+import Link from "next/link";
+import { ParticleBackground } from "@/components/ParticleBackground";
+import { GeometricPattern } from "@/components/GeometricPattern";
+import { ArrowRight, ShieldCheck, Coins, Activity, Globe } from "lucide-react";
 
-import { useState, useEffect } from "react";
-import { palmUSDService } from "@/lib/palmusd";
-
-export default function ZakflowDashboard() {
-  const [view, setView] = useState<'send' | 'history' | 'gold'>('send');
-  const [amount, setAmount] = useState<string>("");
-  const [recipient, setRecipient] = useState<string>("");
-  const [status, setStatus] = useState<'idle' | 'processing' | 'success'>('idle');
-
-  // Gold price data
-  const PUSD_TO_GOLD_OUNCE = 0.00042; // 1 PUSD = ~0.00042 oz gold
-  const GOLD_PRICE_OZ = 2380.50; // USD
-  
-  const parsedAmount = parseFloat(amount) || 0;
-  const zakatAmount = parsedAmount * 0.025;
-  const netAmount = parsedAmount - zakatAmount;
-  
-  const [goldMetrics, setGoldMetrics] = useState({ priceOz: GOLD_PRICE_OZ, backingRatio: 100.12 });
-
-  useEffect(() => {
-    palmUSDService.getGoldReserveMetrics().then(setGoldMetrics);
-  }, []);
-
-  const handleSend = async () => {
-    if (!amount || !recipient) return;
-    setStatus('processing');
-    const payerPubkey = "11111111111111111111111111111111"; // System program
-    await palmUSDService.sendZakatRemittance(payerPubkey, recipient, parsedAmount, zakatAmount);
-    setStatus('success');
-  };
-
-  const renderSend = () => {
-    if (status === 'success') {
-      return (
-        <div className="glass-panel p-8 rounded-xl max-w-lg mx-auto text-center space-y-6">
-          <div className="w-20 h-20 bg-brand-primary/20 text-brand-primary rounded-full flex items-center justify-center mx-auto mb-4 border border-brand-primary/50">
-            <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <h2 className="text-2xl font-bold">Remittance Sent Successfully</h2>
-          <div className="text-brand-muted font-mono space-y-2 bg-brand-surface/50 p-4 rounded-lg border border-brand-border text-left">
-            <div className="flex justify-between"><span>Amount:</span> <span className="text-white">{parsedAmount} PUSD</span></div>
-            <div className="flex justify-between"><span>Zakat Deducted (2.5%):</span> <span className="text-status-warning">{zakatAmount.toFixed(4)} PUSD</span></div>
-            <div className="flex justify-between"><span>Net to Recipient:</span> <span className="text-white">{netAmount.toFixed(4)} PUSD</span></div>
-            <div className="flex justify-between pt-2 border-t border-brand-border mt-2"><span>Gold Equivalent:</span> <span className="text-brand-gold">{(parsedAmount * PUSD_TO_GOLD_OUNCE).toFixed(5)} oz</span></div>
-            <div className="flex justify-between"><span>Recipient:</span> <span className="truncate w-32 text-right">{recipient}</span></div>
-          </div>
-          <div className="flex justify-center gap-2 items-center text-status-success text-sm mt-4">
-            <span>✓ Shariah Compliance Certificate Generated</span>
-          </div>
-          <button onClick={() => { setStatus('idle'); setAmount(""); setRecipient(""); }} className="w-full mt-4 py-3 border border-brand-border rounded hover:bg-brand-surface transition-colors">
-            Send Another
-          </button>
-        </div>
-      );
-    }
-
-    return (
-      <div className="glass-panel p-8 rounded-xl max-w-lg mx-auto">
-        <h2 className="text-2xl font-bold mb-6">Send Zakat-Enabled Remittance</h2>
-        
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-brand-muted mb-1">Recipient Address (Solana)</label>
-            <input 
-              type="text" 
-              value={recipient}
-              onChange={(e) => setRecipient(e.target.value)}
-              className="w-full bg-brand-bg border border-brand-border rounded p-3 text-white font-mono focus:outline-none focus:border-brand-primary" 
-              placeholder="E.g. 7X...aB" 
-            />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-brand-muted mb-1">Amount (PUSD)</label>
-            <div className="relative">
-              <input 
-                type="number" 
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                className="w-full bg-brand-bg border border-brand-border rounded p-3 text-white font-mono focus:outline-none focus:border-brand-primary" 
-                placeholder="0.00" 
-              />
-              <span className="absolute right-4 top-3 text-brand-gold font-bold">PUSD</span>
-            </div>
-            {parsedAmount > 0 && (
-              <div className="mt-2 text-xs font-mono text-brand-muted">
-                ≈ {(parsedAmount * PUSD_TO_GOLD_OUNCE).toFixed(5)} oz physical gold
-              </div>
-            )}
-          </div>
-
-          <div className="bg-brand-surface/50 border border-brand-border rounded-lg p-4 font-mono text-sm space-y-2 mt-6">
-            <div className="flex justify-between">
-              <span className="text-brand-muted">Gross Remittance:</span>
-              <span>{parsedAmount.toFixed(4)} PUSD</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-brand-muted flex items-center gap-2">
-                Zakat Deduction (2.5%)
-                <span className="w-3 h-3 rounded-full bg-brand-primary flex items-center justify-center text-[8px] text-white font-bold" title="Auto-routed to verified charities">?</span>
-              </span>
-              <span className="text-status-warning">-{zakatAmount.toFixed(4)} PUSD</span>
-            </div>
-            <div className="flex justify-between pt-2 border-t border-brand-border font-bold">
-              <span>Net Transfer:</span>
-              <span className="text-brand-primary">{netAmount.toFixed(4)} PUSD</span>
-            </div>
-          </div>
-
-          <button 
-            onClick={handleSend}
-            disabled={status === 'processing' || !amount || !recipient}
-            className={`w-full py-3 mt-6 rounded font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)] ${
-              status === 'processing' || !amount || !recipient
-                ? 'bg-brand-surface text-brand-muted cursor-not-allowed border border-brand-border shadow-none'
-                : 'bg-brand-primary text-white hover:bg-brand-primary/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.5)]'
-            }`}
-          >
-            {status === 'processing' ? 'Processing Transfer & Zakat...' : 'Confirm Transfer'}
-          </button>
-        </div>
-      </div>
-    );
-  };
-
-  const renderGold = () => (
-    <div className="max-w-4xl mx-auto space-y-6">
-      <div className="grid md:grid-cols-3 gap-6">
-        <div className="glass-panel p-6 rounded-xl border-t-2 border-brand-gold">
-          <div className="text-sm text-brand-muted mb-2 font-mono">GOLD SPOT PRICE (OZ)</div>
-          <div className="text-3xl font-bold text-white">${goldMetrics.priceOz.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-          <div className="text-status-success text-sm mt-2 font-mono">+0.42% (24h)</div>
-        </div>
-        <div className="glass-panel p-6 rounded-xl border-t-2 border-brand-primary">
-          <div className="text-sm text-brand-muted mb-2 font-mono">PUSD PEG VALUE</div>
-          <div className="text-3xl font-bold text-white">1.00 USD</div>
-          <div className="text-brand-muted text-sm mt-2 font-mono">Fully backed by Gold</div>
-        </div>
-        <div className="glass-panel p-6 rounded-xl border-t-2 border-status-warning">
-          <div className="text-sm text-brand-muted mb-2 font-mono">ZAKAT DISTRIBUTED</div>
-          <div className="text-3xl font-bold text-white">12,450 PUSD</div>
-          <div className="text-brand-muted text-sm mt-2 font-mono">Via Zakflow protocol</div>
-        </div>
-      </div>
-      
-      <div className="glass-panel p-6 rounded-xl">
-        <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-          <span className="text-brand-gold">★</span> Shariah Compliance Registry
-        </h3>
-        <p className="text-brand-muted text-sm mb-4">
-          All PUSD issued through Palm USD is physically backed by allocated gold stored in highly secure vaults. 
-          Zakflow ensures all transfers adhere to the 2.5% Nisab requirement.
-        </p>
-        <div className="font-mono text-xs text-brand-muted bg-brand-bg p-4 rounded border border-brand-border">
-          <div>&gt; LATEST_AUDIT: PASSED</div>
-          <div>&gt; AUDITOR: Amanah Crypto Consult</div>
-          <div>&gt; DATE: 2026-04-15</div>
-          <div>&gt; GOLD_RESERVE_RATIO: {goldMetrics.backingRatio}%</div>
-        </div>
-      </div>
-    </div>
-  );
-
+export default function LandingPage() {
   return (
-    <>
-    <StatusBar />
-    <div className="min-h-screen p-8 max-w-6xl mx-auto space-y-8">
-      <header className="flex justify-between items-center pb-6 border-b border-brand-border">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-3">
-            <span className="text-brand-primary">Zak</span>flow
-          </h1>
-          <p className="text-brand-muted mt-1 text-sm">Shariah-Compliant Remittance on Palm USD</p>
-        </div>
-        <div className="flex gap-2">
-          {['send', 'gold'].map((tab) => (
-            <button 
-              key={tab}
-              onClick={() => setView(tab as any)}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                view === tab 
-                  ? 'bg-brand-surface text-brand-primary border border-brand-primary/50' 
-                  : 'bg-transparent text-brand-muted hover:text-white'
-              }`}
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          ))}
-        </div>
-      </header>
+    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-linear-to-b from-brand-bg via-brand-surface/20 to-brand-bg z-0" />
+      <ParticleBackground />
+      <GeometricPattern />
 
-      <main>
-        {view === 'send' && renderSend()}
-        {view === 'gold' && renderGold()}
+      {/* Hero Content */}
+      <main className="relative z-10 max-w-5xl w-full px-6 flex flex-col items-center text-center space-y-12 py-20">
+        
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-sm font-mono animate-pulse-glow">
+          <ShieldCheck className="w-4 h-4" />
+          <span>100% Shariah-Compliant Remittance</span>
+        </div>
+
+        {/* Headline */}
+        <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white drop-shadow-2xl">
+          Digital Gold Meets <br />
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-brand-primary to-emerald-300">
+            Global Remittance.
+          </span>
+        </h1>
+
+        {/* Sub-headline */}
+        <p className="text-xl text-brand-muted max-w-2xl leading-relaxed">
+          Zakflow empowers the global Muslim community with seamless, low-cost remittances backed by physical gold, featuring automated 2.5% Zakat routing.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 pt-4">
+          <Link href="/dashboard">
+            <button className="group relative px-8 py-4 bg-brand-primary text-white rounded-lg font-bold text-lg hover:bg-emerald-400 transition-all shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:shadow-[0_0_35px_rgba(16,185,129,0.6)] flex items-center gap-3 overflow-hidden">
+              <span className="relative z-10">Launch App</span>
+              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+              <div className="absolute inset-0 w-full h-full animate-shimmer opacity-20 pointer-events-none" />
+            </button>
+          </Link>
+          
+          <a href="#features" className="px-8 py-4 glass-panel text-white rounded-lg font-bold text-lg hover:bg-brand-surface/80 transition-colors flex items-center justify-center">
+            View Features
+          </a>
+        </div>
+
+        {/* Feature Cards Grid */}
+        <div id="features" className="grid md:grid-cols-3 gap-6 w-full pt-24">
+          
+          {/* Card 1 */}
+          <div className="glass-panel p-8 rounded-2xl text-left hover:border-brand-primary/50 transition-colors group animate-float" style={{ animationDelay: '0s' }}>
+            <div className="w-14 h-14 bg-brand-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <Coins className="w-7 h-7 text-brand-primary" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">Auto Zakat Routing</h3>
+            <p className="text-brand-muted leading-relaxed">
+              Every remittance automatically calculates and routes the 2.5% Nisab requirement directly to verified charitable organizations.
+            </p>
+          </div>
+
+          {/* Card 2 */}
+          <div className="glass-panel p-8 rounded-2xl text-left hover:border-brand-gold/50 transition-colors group animate-float" style={{ animationDelay: '1s' }}>
+            <div className="w-14 h-14 bg-brand-gold/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <Activity className="w-7 h-7 text-brand-gold" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">Gold-Backed PUSD</h3>
+            <p className="text-brand-muted leading-relaxed">
+              Transfer value using Palm USD, fully collateralized by physical, allocated gold stored in secure global vaults.
+            </p>
+          </div>
+
+          {/* Card 3 */}
+          <div className="glass-panel p-8 rounded-2xl text-left hover:border-blue-400/50 transition-colors group animate-float" style={{ animationDelay: '2s' }}>
+            <div className="w-14 h-14 bg-blue-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <Globe className="w-7 h-7 text-blue-400" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">Instant Settlement</h3>
+            <p className="text-brand-muted leading-relaxed">
+              Powered by the Solana network, enabling sub-second finality and near-zero fees for cross-border transactions globally.
+            </p>
+          </div>
+
+        </div>
       </main>
     </div>
-    <Footer />
-    </>
   );
 }
