@@ -82,9 +82,8 @@ describe('PalmUSDService', () => {
 
       const result = await service.sendZakatRemittance(payer, recipient, amount, zakatAmount);
 
-      expect(console.error).toHaveBeenCalledWith(
-        '[Palm USD SDK] Failed to build transaction:',
-        expect.any(Error)
+      expect(console.warn).toHaveBeenCalledWith(
+        "[Palm USD SDK] Demo mode fallback triggered (RPC unavailable)"
       );
       expect(result.txId).toMatch(/^tx_pusd_/);
       expect(result.goldEquivalent).toBe(1000 * 0.00042);

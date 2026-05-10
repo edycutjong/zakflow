@@ -1,7 +1,7 @@
 <div align="center">
   <h1>Zakflow 🚀</h1>
   <p><em>Zakat-enabled PUSD remittance. Gold-backed. Shariah-compliant.</em></p>
-  <img src="docs/assets/readme-hero.png" alt="Zakflow Hero" width="100%">
+  <img src="docs/readme-hero.png" alt="Zakflow Hero" width="100%">
   
   <br/>
   
@@ -28,7 +28,7 @@
 [**▶️ Watch the Demo Video**](https://youtube.com/your-video)
 
 <div align="center">
-  <img src="docs/assets/og-image.png" alt="App Demo" width="100%">
+  <img src="public/og-image.png" alt="App Demo" width="100%">
 </div>
 
 ## 💡 The Problem & Solution

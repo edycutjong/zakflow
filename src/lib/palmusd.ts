@@ -40,7 +40,7 @@ export class PalmUSDService {
           txId: `tx_pusd_${Math.random().toString(36).substring(7)}`,
           goldEquivalent
         };
-      } catch (err) {
+      } catch {
         console.warn("[Palm USD SDK] Demo mode fallback triggered (RPC unavailable)");
       }
     }
