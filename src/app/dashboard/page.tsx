@@ -116,10 +116,10 @@ export default function ZakflowDashboard() {
 
           <button 
             onClick={handleSend}
-            disabled={status === 'processing' || !amount || !recipient}
+            disabled={status === 'processing'}
             className={`w-full py-3 mt-6 rounded font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)] ${
               status === 'processing' || !amount || !recipient
-                ? 'bg-brand-surface text-brand-muted cursor-not-allowed border border-brand-border shadow-none'
+                ? 'bg-brand-surface text-brand-muted cursor-not-allowed shadow-none border border-brand-border'
                 : 'bg-brand-primary text-white hover:bg-brand-primary/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.5)]'
             }`}
           >
@@ -183,7 +183,7 @@ export default function ZakflowDashboard() {
           {['send', 'gold'].map((tab) => (
             <button 
               key={tab}
-              onClick={() => setView(tab as any)}
+              onClick={() => setView(tab as 'send' | 'history' | 'gold')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 view === tab 
                   ? 'bg-brand-surface text-brand-primary border border-brand-primary/50' 

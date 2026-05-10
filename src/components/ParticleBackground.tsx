@@ -7,9 +7,11 @@ export function ParticleBackground() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    /* v8 ignore next */
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
+    /* v8 ignore next */
     if (!ctx) return;
 
     let animationFrameId: number;

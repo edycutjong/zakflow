@@ -1,4 +1,4 @@
-import { Connection, PublicKey, Transaction, SystemProgram } from "@solana/web3.js";
+import { Connection, PublicKey, Transaction } from "@solana/web3.js";
 
 export class PalmUSDService {
   private connection: Connection | null = null;
@@ -29,7 +29,7 @@ export class PalmUSDService {
         // and a second instruction for the Zakat routing
         const { blockhash } = await this.connection.getLatestBlockhash();
         
-        const tx = new Transaction({
+        new Transaction({
           recentBlockhash: blockhash,
           feePayer: new PublicKey(payerPubkey)
         });
@@ -69,7 +69,7 @@ export class PalmUSDService {
         priceOz: data.price,
         backingRatio: 100.12
       };
-    } catch (e) {
+    } catch {
       // Fallback
       await new Promise(res => setTimeout(res, 500));
       return {
