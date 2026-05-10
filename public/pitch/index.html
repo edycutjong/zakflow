@@ -1,258 +1,151 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Zakflow Pitch Deck | Palm USD x Superteam</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css">
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
-      
-      .reveal {
-        font-family: 'Outfit', sans-serif;
-      }
-      .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
-        font-family: 'Outfit', sans-serif;
-        text-transform: none;
-        font-weight: 800;
-        letter-spacing: -0.02em;
-      }
-      
-      /* Wow factor animated background */
-      body {
-        background: #020617; /* Slate 950 */
-        overflow: hidden;
-      }
-      .bg-effects {
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: -1;
-        background-image: 
-          radial-gradient(circle at 15% 50%, rgba(168, 85, 247, 0.15), transparent 25%),
-          radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.15), transparent 25%);
-        background-size: 100% 100%;
-        animation: pulseBg 10s ease-in-out infinite alternate;
-      }
-      .grid-pattern {
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: -1;
-        background-image: 
-          linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-        background-size: 40px 40px;
-        mask-image: radial-gradient(circle at center, black, transparent 80%);
-        -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
-      }
-      @keyframes pulseBg {
-        0% { transform: scale(1); opacity: 0.8; }
-        100% { transform: scale(1.1); opacity: 1; }
-      }
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Zakflow — Shari'ah-Compliant Remittance | Pitch Deck</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--cyan:#06b6d4;--emerald:#10b981;--green:#22c55e;--red:#ef4444;--amber:#f59e0b;--slate-400:#94a3b8;--slate-600:#475569}
+    body{background:#020617}
+    #particle-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+    .reveal{font-family:'Inter',system-ui,sans-serif;position:relative;z-index:1}
+    .reveal .slide-background{background:transparent!important}
+    .reveal .slides section{background:transparent}
+    .reveal h1,.reveal h2,.reveal h3{text-transform:none;font-family:'Inter',system-ui,sans-serif;font-weight:800;letter-spacing:-0.03em}
+    .brand-gradient{background:linear-gradient(135deg,var(--emerald),var(--cyan),var(--emerald));background-size:200% 200%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:gs 4s ease infinite}
+    @keyframes gs{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    .glow-title{text-shadow:0 0 40px rgba(16,185,129,0.3),0 0 80px rgba(16,185,129,0.1)}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:999px;font-size:.55em;font-family:'JetBrains Mono',monospace;font-weight:600;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(16,185,129,0.3);background:rgba(16,185,129,0.08);color:var(--emerald)}
+    .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--emerald);animation:pulse 2s ease-in-out infinite;box-shadow:0 0 8px var(--emerald)}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+    .glass-card{background:rgba(255,255,255,0.03);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:32px;transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+    .glass-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent)}
+    .glass-card:hover{border-color:rgba(16,185,129,0.25);transform:translateY(-2px);box-shadow:0 8px 32px rgba(16,185,129,0.1)}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}
+    .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:stretch}
+    .metric-value{font-family:'JetBrains Mono',monospace;font-size:3em;font-weight:700;margin:0;line-height:1}
+    .metric-label{font-size:.48em;color:var(--slate-400);text-transform:uppercase;letter-spacing:3px;margin-top:12px;font-weight:600}
+    .icon-ring{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6em;margin-bottom:16px}
+    .icon-ring.emerald{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)}
+    .icon-ring.cyan{background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2)}
+    .icon-ring.amber{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2)}
+    .reveal .problem-list{list-style:none;width:90%;text-align:left}
+    .reveal .problem-list li{padding:16px 20px;margin-bottom:12px;border-radius:12px;background:rgba(239,68,68,0.05);border-left:3px solid var(--red);color:#e2e8f0;font-size:.85em;line-height:1.5}
+    .flow-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+    .flow-node{padding:10px 20px;border-radius:10px;font-size:.6em;font-family:'JetBrains Mono',monospace;font-weight:600}
+    .flow-arrow{color:var(--slate-600);font-size:1.2em}
+    .terminal-block{background:#0a0a0a;border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;text-align:left;font-family:'JetBrains Mono',monospace;font-size:.5em}
+    .terminal-header{display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.06)}
+    .terminal-dot{width:10px;height:10px;border-radius:50%}
+    .terminal-body{padding:16px;line-height:1.8}
+    .t-cyan{color:var(--cyan)}.t-green{color:var(--emerald)}.t-red{color:var(--red)}.t-amber{color:var(--amber)}.t-dim{color:var(--slate-600)}
+    .link-card{display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);text-decoration:none;transition:all .3s ease;margin-bottom:10px}
+    .link-card:hover{background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);transform:translateX(4px)}
+    .link-card .link-label{font-size:.6em;color:var(--emerald);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+    .link-card .link-url{font-size:.7em;color:#fff;font-family:'JetBrains Mono',monospace}
+    .link-card .link-icon{font-size:1.4em}
+    .halal-badge{display:inline-block;padding:4px 12px;border-radius:999px;font-size:.45em;font-family:'JetBrains Mono',monospace;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4);color:var(--emerald);letter-spacing:1px}
+  </style>
+</head>
+<body>
+  <canvas id="particle-canvas"></canvas>
+  <div class="reveal">
+    <div class="slides">
 
-      /* Glowing Texts */
-      .brand-text {
-        background: linear-gradient(135deg, #06b6d4, #a855f7, #3b82f6);
-        background-size: 200% 200%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: gradientMove 3s ease infinite;
-      }
-      @keyframes gradientMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
+      <section>
+        <div class="badge"><span class="dot"></span> Palm USD Integration</div>
+        <h1 style="font-size:3.5em;margin-top:24px" class="glow-title"><span class="brand-gradient">Zakflow</span></h1>
+        <p style="color:#cbd5e1;font-size:.95em;max-width:640px;margin:16px auto 0;line-height:1.6">
+          <strong style="color:#fff">Shari'ah-compliant remittance</strong> — Palm USD stablecoin powering ethical cross-border transfers.
+        </p>
+        <div style="margin-top:24px"><span class="halal-badge">☪ SHARI'AH COMPLIANT</span></div>
+        <p style="color:var(--slate-400);font-size:.65em;margin-top:24px;letter-spacing:2px;text-transform:uppercase">Colosseum Frontier Hackathon 2026</p>
+      </section>
 
-      /* Glassmorphism Cards */
-      .glass-card {
-        background: rgba(30, 41, 59, 0.4);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 40px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-        transition: transform 0.3s ease, border-color 0.3s ease;
-      }
-      .glass-card:hover {
-        transform: translateY(-5px);
-        border-color: rgba(6, 182, 212, 0.5);
-      }
+      <section>
+        <h2 style="font-size:2em">The <span style="color:var(--red)">Problem</span></h2>
+        <p style="color:var(--slate-400);font-size:.75em;margin-bottom:28px">1.9B Muslims need halal finance. Traditional remittance fails them.</p>
+        <ul class="problem-list">
+          <li>🏦 <strong>Interest-bearing rails</strong> — SWIFT and Western Union charge fees built on riba (interest)</li>
+          <li>⏰ <strong>3–5 day settlement</strong> — Cross-border transfers are still painfully slow</li>
+          <li>💸 <strong>$48B in annual fees</strong> — Remittance fees average 6.2% globally; OIC corridors even higher</li>
+        </ul>
+      </section>
 
-      .grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-        align-items: stretch;
-      }
-      .grid-3 {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 20px;
-        align-items: stretch;
-      }
+      <section>
+        <h2 style="font-size:2em">The <span class="brand-gradient">Solution</span></h2>
+        <p style="color:#cbd5e1;font-size:.75em;margin-bottom:24px">Palm USD stablecoin + Zakat-on-Send = ethical, instant, low-cost transfers.</p>
+        <div class="grid-3" style="margin-top:20px">
+          <div class="glass-card" style="text-align:left"><div class="icon-ring emerald">☪</div><h3 style="font-size:.9em;color:#fff;margin:0 0 8px">Palm USD Transfer</h3><p style="font-size:.55em;color:var(--slate-400);line-height:1.6">Send stablecoins via Solana. No interest. Settlement in seconds, not days.</p></div>
+          <div class="glass-card" style="text-align:left"><div class="icon-ring cyan">💧</div><h3 style="font-size:.9em;color:#fff;margin:0 0 8px">Zakat-on-Send</h3><p style="font-size:.55em;color:var(--slate-400);line-height:1.6">Optional 2.5% auto-deduction routed to verified charity wallets.</p></div>
+          <div class="glass-card" style="text-align:left"><div class="icon-ring amber">📊</div><h3 style="font-size:.9em;color:#fff;margin:0 0 8px">Compliance Dashboard</h3><p style="font-size:.55em;color:var(--slate-400);line-height:1.6">Track Zakat history, donation receipts, and compliance status on-chain.</p></div>
+        </div>
+      </section>
 
-      .metric-value {
-        font-size: 3em;
-        font-weight: 800;
-        background: linear-gradient(to right, #22d3ee, #06b6d4);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin: 0;
-      }
-      .metric-label {
-        font-size: 0.6em;
-        color: #94a3b8;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-top: 10px;
-        font-weight: 600;
-      }
-
-      .reveal ul {
-        list-style: none;
-        padding: 0;
-      }
-      .reveal ul li {
-        position: relative;
-        padding-left: 40px;
-        margin-bottom: 20px;
-        font-size: 0.8em;
-        color: #e2e8f0;
-      }
-      .reveal ul li::before {
-        content: "→";
-        position: absolute;
-        left: 0;
-        color: #06b6d4;
-        font-weight: bold;
-      }
-
-      /* Animated floating elements */
-      .float {
-        animation: floating 3s ease-in-out infinite;
-      }
-      @keyframes floating {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0px); }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="bg-effects"></div>
-    <div class="grid-pattern"></div>
-    
-    <div class="reveal">
-      <div class="slides">
-        
-        <!-- Slide 1: Hero -->
-        <section data-auto-animate>
-          <div class="float" style="font-size: 4em; margin-bottom: 20px;">🌊</div>
-          <h1 class="brand-text" style="font-size: 4em;">Zakflow</h1>
-          <p style="font-size: 1.2em; color: #cbd5e1; font-weight: 300;">Shariah-Compliant Remittance on Solana</p>
-          <div class="glass-card" style="margin-top: 40px; padding: 20px; display: inline-block;">
-            <p style="margin: 0; font-size: 0.6em; color: #94a3b8; letter-spacing: 2px; text-transform: uppercase;">Powered by Palm USD (PUSD) & Gold-Backed Proofs</p>
+      <section>
+        <h2 style="font-size:1.8em">The Transfer Flow</h2>
+        <div class="flow-row" style="margin:30px 0 20px">
+          <div class="flow-node" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:var(--emerald)">Sender</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node" style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.3);color:var(--cyan)">Palm USD</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);color:var(--amber)">Zakat 2.5%</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-node" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:var(--emerald)">Recipient</div>
+        </div>
+        <div class="terminal-block" style="max-width:680px;margin:0 auto">
+          <div class="terminal-header">
+            <div class="terminal-dot" style="background:#ef4444"></div>
+            <div class="terminal-dot" style="background:#f59e0b"></div>
+            <div class="terminal-dot" style="background:#22c55e"></div>
+            <span style="color:var(--slate-400);margin-left:8px">Zakflow Transfer Engine</span>
           </div>
-        </section>
-
-        <!-- Slide 2: Problem -->
-        <section data-auto-animate>
-          <h2 style="margin-bottom: 40px;">The <span style="color: #ef4444;">Friction</span></h2>
-          <div class="grid-3">
-            <div class="glass-card fragment fade-up">
-              <div style="font-size: 2em; margin-bottom: 15px;">🐌</div>
-              <h4 style="font-size: 0.9em; color: #f8fafc;">Slow & Costly</h4>
-              <p style="font-size: 0.6em; color: #94a3b8;">Traditional remittance takes days and charges up to 7%.</p>
-            </div>
-            <div class="glass-card fragment fade-up" data-fragment-index="1">
-              <div style="font-size: 2em; margin-bottom: 15px;">🚫</div>
-              <h4 style="font-size: 0.9em; color: #f8fafc;">Non-Compliant</h4>
-              <p style="font-size: 0.6em; color: #94a3b8;">Most crypto solutions lack Shariah-compliant mechanics.</p>
-            </div>
-            <div class="glass-card fragment fade-up" data-fragment-index="2">
-              <div style="font-size: 2em; margin-bottom: 15px;">📉</div>
-              <h4 style="font-size: 0.9em; color: #f8fafc;">No Transparency</h4>
-              <p style="font-size: 0.6em; color: #94a3b8;">Users have zero visibility into physical backing assets.</p>
-            </div>
+          <div class="terminal-body">
+            <div><span class="t-dim">[send]</span> <span class="t-green">›</span> Transfer: 1,000 Palm USD → Jakarta, ID</div>
+            <div><span class="t-dim">[zakat]</span> <span class="t-amber">⚙</span> Auto-deduction: 25 Palm USD (2.5%) → charity wallet</div>
+            <div><span class="t-dim">[settle]</span> <span class="t-green">✓</span> 975 Palm USD received — settled in 1.2s</div>
+            <div><span class="t-dim">[fee]</span> <span class="t-green">✓</span> Total fee: $0.001 (vs. $62 via SWIFT)</div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- Slide 3: Solution -->
-        <section data-auto-animate>
-          <h2 style="margin-bottom: 40px;">The <span class="brand-text">Zakflow</span> Edge</h2>
-          <div class="grid-2">
-            <div class="glass-card" style="text-align: left;">
-              <h3 style="font-size: 1em; color: #06b6d4; margin-bottom: 20px;">Palm USD (PUSD) Core</h3>
-              <ul>
-                <li>Instantly transfer stable, Shariah-compliant value globally.</li>
-                <li>Automated 2.5% Zakat routing directly on-chain.</li>
-                <li>Sub-second settlement via Solana.</li>
-              </ul>
-            </div>
-            <div class="glass-card" style="text-align: left;">
-              <h3 style="font-size: 1em; color: #a855f7; margin-bottom: 20px;">Gold-Backed Transparency</h3>
-              <ul>
-                <li>Live GoldAPI integration verifies physical backing.</li>
-                <li>Real-time asset-to-token ratio dashboard.</li>
-                <li>Cryptographic proof of reserves.</li>
-              </ul>
-            </div>
-          </div>
-        </section>
+      <section>
+        <h2 style="font-size:1.8em">Production Ready</h2>
+        <div class="grid-3" style="margin-top:24px">
+          <div class="glass-card" style="text-align:center"><p class="metric-value" style="color:var(--cyan)" data-count="100">0%</p><p class="metric-label">Test Coverage</p></div>
+          <div class="glass-card" style="text-align:center"><p class="metric-value" style="color:var(--green)">Zero</p><p class="metric-label">Lint Warnings</p></div>
+          <div class="glass-card" style="text-align:center"><p class="metric-value" style="color:var(--amber)">1.2s</p><p class="metric-label">Settlement</p></div>
+        </div>
+        <div class="flow-row" style="margin-top:28px;gap:20px;flex-wrap:wrap">
+          <span class="badge" style="font-size:.45em">Next.js 16</span>
+          <span class="badge" style="font-size:.45em">React 19</span>
+          <span class="badge" style="font-size:.45em">Palm USD</span>
+          <span class="badge" style="font-size:.45em">Solana</span>
+          <span class="badge" style="font-size:.45em">Tailwind v4</span>
+          <span class="badge" style="font-size:.45em">Vitest</span>
+        </div>
+      </section>
 
-        <!-- Slide 4: Engineering Quality -->
-        <section data-auto-animate>
-          <h2 style="margin-bottom: 40px;">Production-Grade Engineering</h2>
-          <div class="grid-3">
-            <div class="glass-card float" style="animation-delay: 0s;">
-              <p class="metric-value">100%</p>
-              <p class="metric-label">Test Coverage</p>
-            </div>
-            <div class="glass-card float" style="animation-delay: 0.2s;">
-              <p class="metric-value">0</p>
-              <p class="metric-label">Lint Warnings</p>
-            </div>
-            <div class="glass-card float" style="animation-delay: 0.4s;">
-              <p class="metric-value">PUSD</p>
-              <p class="metric-label">Native Integration</p>
-            </div>
-          </div>
-          <p style="font-size: 0.6em; color: #94a3b8; margin-top: 40px;" class="fragment fade-in">
-            Built with Next.js 16 App Router, React 19, Tailwind v4, and Vitest.<br/>Fully automated CI pipeline & clean environment config.
-          </p>
-        </section>
+      <section>
+        <h2 style="font-size:2em">Experience <span class="brand-gradient">Zakflow</span></h2>
+        <div style="max-width:420px;margin:32px auto 0">
+          <a href="https://zakflow.edycu.dev" target="_blank" class="link-card"><span class="link-icon">🚀</span><div><div class="link-label">Live Demo</div><div class="link-url">zakflow.edycu.dev</div></div></a>
+          <a href="https://github.com/edycutjong/zakflow" target="_blank" class="link-card"><span class="link-icon">📦</span><div><div class="link-label">Source Code</div><div class="link-url">edycutjong/zakflow</div></div></a>
+        </div>
+        <p style="font-size:.55em;color:var(--slate-600);margin-top:36px;font-style:italic">$0.001 per transfer. 1.2s settlement. Shari'ah-first.</p>
+      </section>
 
-        <!-- Slide 5: Demo / Links -->
-        <section data-auto-animate>
-          <h2>Experience <span class="brand-text">Zakflow</span></h2>
-          <div class="glass-card" style="margin-top: 40px; text-align: left; width: 80%; margin: 40px auto;">
-            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; margin-bottom: 20px;">
-              <span style="color: #94a3b8; font-weight: 600;">Live Demo</span>
-              <a href="https://zakflow.vercel.app" target="_blank" style="color: #22d3ee; font-size: 1.2em; text-decoration: none;">zakflow.vercel.app ↗</a>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-              <span style="color: #94a3b8; font-weight: 600;">Source Code</span>
-              <a href="https://github.com/edycutjong/frontier-palm-usd" target="_blank" style="color: #22d3ee; font-size: 1.2em; text-decoration: none;">GitHub Repo ↗</a>
-            </div>
-          </div>
-          <p style="font-size: 0.7em; color: #64748b; margin-top: 40px; letter-spacing: 1px; text-transform: uppercase;">Ready for Colosseum Frontier</p>
-        </section>
-
-      </div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
-    <script>
-      Reveal.initialize({
-        hash: true,
-        transition: 'slide',
-        backgroundTransition: 'fade',
-        controls: true,
-        progress: true,
-        center: true,
-      });
-    </script>
-  </body>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
+  <script>
+    (function(){const c=document.getElementById('particle-canvas'),x=c.getContext('2d');let p=[];const N=75;function r(){c.width=innerWidth;c.height=innerHeight}addEventListener('resize',r);r();class P{constructor(){this.r()}r(){this.x=Math.random()*c.width;this.y=Math.random()*c.height;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.s=Math.random()*1.5+.5;this.o=Math.random()*.5+.1}u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>c.width)this.vx*=-1;if(this.y<0||this.y>c.height)this.vy*=-1}d(){x.beginPath();x.arc(this.x,this.y,this.s,0,Math.PI*2);x.fillStyle=`rgba(16,185,129,${this.o})`;x.fill()}}for(let i=0;i<N;i++)p.push(new P);function a(){x.clearRect(0,0,c.width,c.height);p.forEach(q=>{q.u();q.d()});for(let i=0;i<p.length;i++)for(let j=i+1;j<p.length;j++){const dx=p[i].x-p[j].x,dy=p[i].y-p[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<150){x.beginPath();x.moveTo(p[i].x,p[i].y);x.lineTo(p[j].x,p[j].y);x.strokeStyle=`rgba(16,185,129,${.06*(1-d/150)})`;x.lineWidth=.5;x.stroke()}}requestAnimationFrame(a)}a()})();
+    Reveal.on('slidechanged',e=>{e.currentSlide.querySelectorAll('[data-count]').forEach(el=>{const t=parseInt(el.dataset.count);let c=0;const s=Math.ceil(t/40),i=setInterval(()=>{c+=s;if(c>=t){c=t;clearInterval(i)}el.textContent=c+'%'},30)})});
+    Reveal.initialize({hash:true,transition:'fade',transitionSpeed:'slow',backgroundTransition:'fade',controls:true,progress:true,center:true,width:1200,height:700});
+  </script>
+</body>
 </html>
