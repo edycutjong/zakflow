@@ -1,0 +1,82 @@
+
+> zakflow@0.1.0 ci
+> npm run lint && npm run typecheck && npm run test:coverage
+
+
+> zakflow@0.1.0 lint
+> eslint .
+
+
+/Users/edycu/Projects/Hackathon/Frontier/frontier-palm-usd/coverage/block-navigation.js
+  1:1  warning  Unused eslint-disable directive (no problems were reported)
+
+/Users/edycu/Projects/Hackathon/Frontier/frontier-palm-usd/src/lib/palmusd.ts
+  32:15  warning  '_tx' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  72:14  warning  '_e' is defined but never used            @typescript-eslint/no-unused-vars
+
+✖ 3 problems (0 errors, 3 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+
+
+> zakflow@0.1.0 typecheck
+> tsc --noEmit
+
+
+> zakflow@0.1.0 test:coverage
+> vitest run --coverage
+
+
+ RUN  v4.1.5 /Users/edycu/Projects/Hackathon/Frontier/frontier-palm-usd
+      Coverage enabled with v8
+
+stdout | src/lib/palmusd.test.ts
+[Palm USD SDK] Initializing Zakflow wrapper for PUSD
+
+stdout | src/lib/palmusd.test.ts > PalmUSDService > init > should initialize successfully only once
+[Palm USD SDK] Initializing Zakflow wrapper for PUSD
+
+stdout | src/lib/palmusd.test.ts > PalmUSDService > init > should use provided NEXT_PUBLIC_RPC_URL
+[Palm USD SDK] Initializing Zakflow wrapper for PUSD
+
+stdout | src/lib/palmusd.test.ts > PalmUSDService > sendZakatRemittance > should successfully build transaction and return txId and goldEquivalent
+[Palm USD SDK] Initializing Zakflow wrapper for PUSD
+
+stdout | src/lib/palmusd.test.ts > PalmUSDService > sendZakatRemittance > should hit catch block if connection throws and fallback
+[Palm USD SDK] Initializing Zakflow wrapper for PUSD
+
+stdout | src/lib/palmusd.test.ts > PalmUSDService > sendZakatRemittance > should fallback if payerPubkey is empty
+[Palm USD SDK] Initializing Zakflow wrapper for PUSD
+
+stdout | src/lib/palmusd.test.ts > PalmUSDService > getGoldReserveMetrics > should return metrics when API fetch succeeds
+[Palm USD SDK] Initializing Zakflow wrapper for PUSD
+
+stdout | src/lib/palmusd.test.ts > PalmUSDService > getGoldReserveMetrics > should use GOLD_API_KEY from env if available
+[Palm USD SDK] Initializing Zakflow wrapper for PUSD
+
+stdout | src/lib/palmusd.test.ts > PalmUSDService > getGoldReserveMetrics > should hit fallback if API fetch fails with not ok
+[Palm USD SDK] Initializing Zakflow wrapper for PUSD
+
+stdout | src/lib/palmusd.test.ts > PalmUSDService > getGoldReserveMetrics > should hit fallback if API fetch throws an error
+[Palm USD SDK] Initializing Zakflow wrapper for PUSD
+
+stdout | src/lib/palmusd.test.ts > PalmUSDService > singleton export > should export an instance of PalmUSDService
+[Palm USD SDK] Initializing Zakflow wrapper for PUSD
+
+ ✓ src/lib/palmusd.test.ts (10 tests) 5014ms
+       ✓ should hit catch block if connection throws and fallback  2003ms
+       ✓ should fallback if payerPubkey is empty  2001ms
+       ✓ should hit fallback if API fetch fails with not ok  501ms
+       ✓ should hit fallback if API fetch throws an error  502ms
+
+ Test Files  1 passed (1)
+      Tests  10 passed (10)
+   Start at  08:06:08
+   Duration  5.79s (transform 32ms, setup 0ms, import 45ms, tests 5.01s, environment 587ms)
+
+ % Coverage report from v8
+------------|---------|----------|---------|---------|-------------------
+File        | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+------------|---------|----------|---------|---------|-------------------
+All files   |     100 |      100 |     100 |     100 |                   
+ palmusd.ts |     100 |      100 |     100 |     100 |                   
+------------|---------|----------|---------|---------|-------------------
