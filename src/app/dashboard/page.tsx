@@ -67,7 +67,15 @@ export default function ZakflowDashboard() {
         
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-brand-muted mb-1">Recipient Address (Solana)</label>
+            <div className="flex justify-between items-center mb-1">
+              <label className="block text-sm font-medium text-brand-muted">Recipient Address (Solana)</label>
+              <button 
+                onClick={() => setRecipient("7XvWg2dKpC1nBvH8mQyP4tZrL9xKwFjN5s3cD6bY8aE")}
+                className="text-xs bg-brand-surface border border-brand-border text-brand-primary px-2 py-1 rounded hover:bg-brand-primary/10 transition-colors font-mono"
+              >
+                Use Demo Address
+              </button>
+            </div>
             <input 
               type="text" 
               value={recipient}
@@ -174,7 +182,7 @@ export default function ZakflowDashboard() {
     <div className="min-h-screen p-8 max-w-6xl mx-auto space-y-8">
       <header className="flex justify-between items-center pb-6 border-b border-brand-border">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-3">
+          <h1 className="text-3xl font-bold tracking-tight text-white">
             <span className="text-brand-primary">Zak</span>flow
           </h1>
           <p className="text-brand-muted mt-1 text-sm">Shariah-Compliant Remittance on Palm USD</p>
