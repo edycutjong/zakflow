@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description: "Zakat-enabled cross-border remittance powered by Palm USD (PUSD) on Solana. Features automated Zakat routing and real-time gold-backing transparency.",
   keywords: ["Solana", "Palm USD", "PUSD", "Remittance", "Zakat", "Islamic Finance", "Shariah-compliant", "Crypto"],
   authors: [{ name: "Zakflow Team" }],
+  metadataBase: new URL("https://zakflow.vercel.app"),
   icons: {
     icon: "/icon.svg",
     apple: "/apple-icon.png",

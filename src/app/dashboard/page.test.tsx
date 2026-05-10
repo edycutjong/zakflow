@@ -77,4 +77,14 @@ describe('ZakflowDashboard', () => {
     // State should still be idle, the inputs should be present
     expect(screen.getByText('Send Zakat-Enabled Remittance')).toBeInTheDocument();
   });
+
+  it('should populate recipient when Use Demo Address is clicked', async () => {
+    await act(async () => { render(<ZakflowDashboard />); });
+    
+    const demoButton = screen.getByText('Use Demo Address');
+    await userEvent.click(demoButton);
+    
+    const addressInput = screen.getByPlaceholderText('E.g. 7X...aB');
+    expect(addressInput).toHaveValue('7XvWg2dKpC1nBvH8mQyP4tZrL9xKwFjN5s3cD6bY8aE');
+  });
 });

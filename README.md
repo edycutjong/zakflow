@@ -8,7 +8,7 @@
   [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://zakflow.edycu.dev)
   [![Pitch Deck](https://img.shields.io/badge/Pitch-Deck-f59e0b.svg)](https://zakflow.edycu.dev/pitch)
   [![Pitch Video](https://img.shields.io/badge/Pitch-Video-red.svg)](https://youtube.com/your-video)
-  [![GitHub](https://img.shields.io/badge/GitHub-Repository-black.svg)](https://superteam.fun/earn/listing/palm-usd-x-superteam-uae-solana-builders-1)
+  [![Superteam Earn](https://img.shields.io/badge/Superteam-Earn_Listing-blue.svg)](https://superteam.fun/earn/listing/palm-usd-x-superteam-uae-solana-builders-1)
 
   <br/>
 

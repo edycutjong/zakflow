@@ -92,7 +92,7 @@ export default function ZakflowDashboard() {
                 type="number" 
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="w-full bg-brand-bg border border-brand-border rounded p-3 text-white font-mono focus:outline-none focus:border-brand-primary" 
+                className="w-full bg-brand-bg border border-brand-border rounded p-3 pr-16 text-white font-mono focus:outline-none focus:border-brand-primary" 
                 placeholder="0.00" 
               />
               <span className="absolute right-4 top-3 text-brand-gold font-bold">PUSD</span>
